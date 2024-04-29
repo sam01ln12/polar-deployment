@@ -11,6 +11,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://polar-postgres:5432/polardb_catalog
       - SPRING_PROFILES_ACTIVE=testdata
+      - SPRING_CLOUD_CONFIG_URI=config-service
 
   polar-postgres:
     image: "postgres:14.4"
@@ -21,3 +22,11 @@ services:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=polardb_catalog
+  
+  config-service:
+    image: "config-service"
+    container_name: "config-service"
+    ports:
+      - 1112:1112
+    environment:
+      - SPRING_PROFILES_ACTIVE=testdata
